@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +48,7 @@ public class Lancamento implements Serializable {
 	@Column(name="tp_tipo")
 	private TipoEnum tipo;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Funcionario funcionario;
 	
 	public Lancamento(Long id, Date data, String descricao, String localizacao, Date dataCriacao, Date dataAtualizacao,

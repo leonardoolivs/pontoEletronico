@@ -5,13 +5,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ponto.enums.PerfilEnum;
@@ -57,9 +61,10 @@ public class Funcionario implements Serializable {
 	@Column(name="dt_atualizacao")
 	private Date dataAtualizacao;
 	
-	@Column(name="tp_empresa")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Empresa empresa;
 	
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Lancamento> lancamentos;
 
 	public Funcionario(Long id, String nome, String email, String senha, String cpf, BigDecimal valorHora,
